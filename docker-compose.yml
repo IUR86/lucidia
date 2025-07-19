@@ -5,6 +5,8 @@ services:
       - ./:/var/www/lucidia
     ports:
       - 80:80
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     environment:

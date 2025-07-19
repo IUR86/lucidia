@@ -1,7 +1,11 @@
 FROM amazonlinux:2023
 
-# timezone
-ENV TZ=Asia/Tokyo
+# setting
+ENV TZ=Asia/Tokyo \
+    ROOT=/var/www/lucidia \
+    APP_ROOT=/var/www/lucidia/src
+
+WORKDIR $ROOT
 
 # php install
 RUN dnf update \
