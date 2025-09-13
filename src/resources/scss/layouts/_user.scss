@@ -1,0 +1,101 @@
+.user-main {
+    .home-head {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background-image: url("https://aipict.com/wp-content/uploads/office_simple03.png");
+        background-size: cover;
+        background-position: center;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.50);
+            z-index: 1;
+        }
+
+        .home-head-content {
+            position: relative; // ::before の上に表示
+            z-index: 2;
+            color: white;
+            top: 20%;
+            left: 6%;
+            transform: translateY(-50%);
+
+            h1 {
+                color: white; // h1を明示的に白に
+                font-size: 3rem; // 必要に応じてサイズ調整
+            }
+            
+            p {
+                color: white; // pも白く
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    .home-main {
+        width: 100%;
+        background: linear-gradient(to bottom,
+            #271cc7 0%,
+            /* ネオンブルー */
+            #0a0a2a 40%,
+            /* ダークネイビー */
+            #2e1fff 100%
+            /* 薄紫寄りブルー */
+        );
+
+        .home-main-content {
+            width: 100%;
+            padding: 40px 0;
+
+            .home-main-content-wrap {
+                max-width: 1100px;
+                margin: 0 auto;
+                color: #fff;
+
+                h2 {
+                    font-size: 40px;
+                    padding: 0 0 30px 0;
+                    border-bottom: 1px solid #fff;
+                }
+
+                .home-main-content-product-list {
+                    padding: 50px 0;
+                    display: flex;
+                    gap: 0 40px;
+
+                    .home-main-content-product-item {
+                        width: fit-content;
+                        height: fit-content;
+
+                        img {
+                            width: 245px;
+                            height: 245px;
+                        }
+
+                        .name {
+                            margin: 10px 0 0 0;
+                        }
+
+                        .price {
+                            margin: 4px 0 0 0;
+                        }
+
+                        button {
+                            border: 1px solid #fff;
+                            margin: 16px 0 0 0;
+                            padding: 4px 16px;
+                            color: #222;
+                            background: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

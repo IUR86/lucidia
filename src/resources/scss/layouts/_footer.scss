@@ -1,0 +1,18 @@
+// ファイル呼び出し
+@use "../abstracts/variables";
+
+// ユーザ画面
+.user {
+    footer {
+        padding: 15px 20px;
+        background-color: variables.$user-header-back-color;
+        display: flex;
+        align-items: center;
+
+        .header__item-title {}
+
+        .header__item-right {
+            margin: 0 0 0 auto;
+        }
+    }
+}

@@ -1,5 +1,8 @@
+version: "3.9"
+
 services:
   amazon-linux:
+    container_name: lucidia-amazon-linux
     build: ./docker/amazon-linux
     volumes:
       - ./:/var/www/lucidia
@@ -7,8 +10,27 @@ services:
       - 80:80
     depends_on:
       - db
+      - mailhog
+      - node
+    environment:
+      - TZ=Asia/Tokyo
+
+  node:
+    image: node:18
+    container_name: lucidia-node
+    working_dir: /var/www/lucidia
+    volumes:
+      - ./src:/var/www/lucidia
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 5173:5173
+    environment:
+      - TZ=Asia/Tokyo
+
   db:
     image: mysql:5.7
+    container_name: lucidia-mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test_database
@@ -22,3 +44,10 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: lucidia-mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025

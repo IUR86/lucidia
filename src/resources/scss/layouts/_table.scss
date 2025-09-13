@@ -1,0 +1,57 @@
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.admin-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-data-table thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.admin-data-table th,
+.admin-data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.admin-data-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-published {
+    background-color: #27ae60;
+    color: white;
+}
+
+.status-draft {
+    background-color: #e67e22;
+    color: white;
+}
+
+.action-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #2980b9;
+}

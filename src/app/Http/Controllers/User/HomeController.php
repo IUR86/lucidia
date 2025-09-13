@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+final class HomeController extends Controller
+{
+    public function index(): \Illuminate\Contracts\View\View
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
+        return view('user.home.index');
+    }
+}
