@@ -2,6 +2,8 @@
 
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\AdminGest;
+use App\Http\Middleware\CounterpartyAuthenticate;
+use App\Http\Middleware\CounterpartyEnsureValidSubdomain;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,6 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
             // 管理者向けルート
             Route::middleware(['web'])
                 ->group(base_path('routes/admin.php'));
+
+            // 契約相手ルート
+            Route::middleware(['web'])
+                ->group(base_path('routes/counterparty.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
@@ -37,8 +43,10 @@ return Application::configure(basePath: dirname(__DIR__))
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]);
         $middleware->alias([
-            'admin.auth' => AdminAuthenticate::class,
-            'admin.gest' => AdminGest::class,
+            'admin.auth'                => AdminAuthenticate::class,
+            'admin.gest'                => AdminGest::class,
+            'counterparty.subdomain'    => CounterpartyEnsureValidSubdomain::class,
+            'counterparty.auth'         => CounterpartyAuthenticate::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

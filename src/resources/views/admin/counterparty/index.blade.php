@@ -12,6 +12,7 @@
                     <th>メールアドレス</th>
                     <th>サブドメイン</th>
                     <th>料金</th>
+                    <th>URL</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,9 @@
                         <td>{{ $counterparty->email }}</td>
                         <td>{{ $counterparty->subdomain }}</td>
                         <td>{{ $counterparty->price }}円</td>
+                        <td>
+                            <a href="{{ route('counterparty.home.index', ['subdomain' => $counterparty->subdomain]) }}">リンク</a>
+                        </td>
                     </tr>
                 @empty
                     <x-admin.table.none_data />

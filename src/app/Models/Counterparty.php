@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-final class Counterparty extends Model
+final class Counterparty extends Authenticatable
 {
     /**
      * モデルと関連しているテーブル

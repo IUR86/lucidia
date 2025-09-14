@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'counterparty' => [
+            'driver' => 'session',
+            'provider' => 'counterparty',
+        ],
     ],
 
     /*
@@ -72,6 +76,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\AdminUser::class,
+        ],
+
+        'counterparty' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Counterparty::class,
         ],
     ],
 

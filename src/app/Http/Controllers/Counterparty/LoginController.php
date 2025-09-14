@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Counterparty;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ final class LoginController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('admin.login.index');
+        return view('counterparty.login.index');
     }
 
     /**
@@ -34,15 +34,15 @@ final class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         // 認証処理
-        if (Auth::guard('admin')->attempt($credentials)) {
-            Log::info("管理者ログイン成功: " . $request->email);
+        if (Auth::guard('counterparty')->attempt($credentials)) {
+            Log::info("契約者ログイン成功: " . $request->email);
 
             $request->session()->regenerate();
 
-            return redirect()->intended(route('admin.home.index'));
+            return redirect()->intended(route('counterparty.home.index', ['subdomain' => $this->subdomain]));
         }
 
-        Log::info("管理者ログイン失敗: " . $request->email);
+        Log::info("契約者ログイン失敗: " . $request->email);
 
         return back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
     }
