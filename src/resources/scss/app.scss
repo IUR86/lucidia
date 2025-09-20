@@ -1,9 +1,15 @@
-@import "./abstracts/variables";
+// ベース
 @import "./base/reset";
 @import "./base/base";
+
+// 定義
+@import "./abstracts/variables";
+
+// レイアウト
 @import "./layouts/header";
 @import "./layouts/form";
 @import "./layouts/table";
 @import "./layouts/auth";
 @import "./layouts/user";
 @import "./layouts/footer";
+@import "./layouts/loading";

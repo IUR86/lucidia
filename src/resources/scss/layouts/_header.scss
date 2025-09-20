@@ -4,15 +4,38 @@
 // ユーザ画面
 .user {
     header {
+        width: 100%;
+        height: 68px;
         padding: 15px 20px;
         background-color: variables.$user-header-back-color;
-        display: flex;
-        align-items: center;
 
-        .header__item-title {}
+        .header-container {
+            width: 100%;
+            max-width: variables.$user-base-max-width;
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
 
-        .header__item-right {
-            margin: 0 0 0 auto;
+            .header__item-title {
+                font-size: 25px;
+                font-weight: 600;
+            }
+        
+            .header__item-right {
+                margin: 0 0 0 auto;
+            }
+        
+            .header__item-cart {
+                margin: 0 0 0 auto;
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+        
+                :hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

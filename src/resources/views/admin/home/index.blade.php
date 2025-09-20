@@ -18,25 +18,21 @@
         <div class="main-content">
             <div class="cards">
                 <div class="card">
-                    <h3>総ユーザー数</h3>
-                    <p>1,234</p>
-                </div>
-                <div class="card">
-                    <h3>ユーザ数</h3>
-                    <p>567</p>
+                    <h3>契約数</h3>
+                    <p>{{ $counterparty_count }}</p>
                 </div>
                 <div class="card">
                     <h3>店舗数</h3>
                     <p>{{ $salon_count }}</p>
                 </div>
                 <div class="card">
+                    <h3>ユーザ数</h3>
+                    <p>567</p>
+                </div>
+                <div class="card">
                     <h3>商品数</h3>
                     <p>5</p>
                 </div>
-            </div>
-
-            <div class="chart">
-                グラフエリア（ここにChart.jsなどを表示可能）
             </div>
         </div>
     </main>

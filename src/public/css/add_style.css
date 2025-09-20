@@ -1,0 +1,9 @@
+.col-md-8-max-width {
+    flex: 100%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-info:hover {
+    cursor: pointer;
+}

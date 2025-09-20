@@ -4,15 +4,34 @@
 // ユーザ画面
 .user {
     footer {
-        padding: 15px 20px;
+        padding: 60px 20px;
         background-color: variables.$user-header-back-color;
-        display: flex;
-        align-items: center;
 
-        .header__item-title {}
+        .footer-container {
+            width: 100%;
+            max-width: variables.$user-base-max-width;
+            margin: 0 auto;
 
-        .header__item-right {
-            margin: 0 0 0 auto;
+            .footer__item-title {
+                color: #fff;
+                font-size: 32px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .footer__item-profile {
+                width: fit-content;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                gap: 0 30px;
+                margin: 40px auto 0 auto;
+
+                p {
+                    width: fit-content;
+                    display: block;
+                }
+            }
         }
     }
 }

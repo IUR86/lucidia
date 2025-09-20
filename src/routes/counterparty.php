@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Counterparty\HomeController;
 use App\Http\Controllers\Counterparty\LoginController;
+use App\Http\Controllers\Counterparty\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 $domain = config('app.domain', 'localhost');
@@ -18,6 +19,11 @@ Route::domain("{subdomain}.{$domain}")->prefix('counterparty')->middleware(['cou
         // ホーム画面
         Route::controller(HomeController::class)->name('home.')->group(function () {
             Route::get('/', 'index')->name('index');
+        });
+        // プロフィール画面
+        Route::prefix('/profile')->controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/update', 'update')->name('update');
         });
     });
 });
