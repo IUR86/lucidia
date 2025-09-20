@@ -22,9 +22,9 @@
                                     <p class="price">{{ $product->price }}円</p>
                                     <button type="submit">+ カートに追加</button>
                                 </form>
-                            </li>
                         @endforeach
                     </ul>
+                    <a href="" class="more-link">もっと見る ＞</a>
                 </div>
             </section>
             <section class="home-main-content">

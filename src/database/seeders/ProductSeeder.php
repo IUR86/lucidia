@@ -43,6 +43,30 @@ class ProductSeeder extends Seeder
             'currency' => 'jpy',
         ];
         $product_create_data_list[] = [
+            'name' => 'Excelインポート',
+            'price' => 500,
+            'type' => ProductType::FUNCTION,
+            'active' => true,
+            'description' => '商品説明',
+            'metadata' => [
+                'type' => ProductType::FUNCTION->value
+            ],
+            'images' => [],
+            'currency' => 'jpy',
+        ];
+        $product_create_data_list[] = [
+            'name' => 'Excelエクスポート',
+            'price' => 500,
+            'type' => ProductType::FUNCTION,
+            'active' => true,
+            'description' => '商品説明',
+            'metadata' => [
+                'type' => ProductType::FUNCTION->value
+            ],
+            'images' => [],
+            'currency' => 'jpy',
+        ];
+        $product_create_data_list[] = [
             'name' => 'お問い合わせ優先対応',
             'price' => 300,
             'type' => ProductType::SERVICE,

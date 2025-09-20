@@ -2,12 +2,24 @@
     <main class="user-main">
         <div class="user-container">
             <h1 class="shopping-title">ログイン</h1>
-            <form action="{{ route('user.login.login') }}" method="POST">
-                @csrf
-                <input type="email" name="email" id="">
-                <input type="password" name="password">
-                <input type="submit" value="ログイン">
-            </form>
+            <div class="login-form-wrap">
+                <form action="{{ route('user.login.login') }}" method="POST">
+                    @csrf
+                    <div class="input-field">
+                        <label>メールアドレス</label>
+                        <input type="email" name="email" id="">
+                    </div>
+                    <div class="input-field">
+                        <label>パスワード</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div class="input-field-show-password">
+                        <input type="checkbox" name="" id="show-password">
+                        <label for="show-password" id="togglePassword">パスワードを見る</label>
+                    </div>
+                    <input type="submit" value="ログイン" class="submit-buntton">
+                </form>
+            </div>
         </div>
     </main>
 </x-user.common>

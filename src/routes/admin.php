@@ -51,6 +51,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::prefix('/product')->controller(ProductController::class)->name('product.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
         });
         // ログアウト
         Route::post('/logout', LogoutController::class)->name('logout');

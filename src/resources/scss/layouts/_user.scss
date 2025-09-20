@@ -6,14 +6,14 @@
     .user-container {
         width: 100%;
         max-width: variables.$user-base-max-width;
-        margin: 20px auto;
+        margin: 40px auto;
     }
     // ホーム画面
     .home-head {
         position: relative;
         width: 100%;
         height: 600px;
-        background-image: url("https://aipict.com/wp-content/uploads/office_simple03.png");
+        background-image: url("http://localhost/img/back/home-head.jpg");
         background-size: cover;
         background-position: center;
 
@@ -29,7 +29,7 @@
         }
 
         .home-head-content {
-            position: relative; // ::before の上に表示
+            position: relative;
             z-index: 2;
             color: white;
             top: 20%;
@@ -37,33 +37,26 @@
             transform: translateY(-50%);
 
             h1 {
-                color: white; // h1を明示的に白に
-                font-size: 3rem; // 必要に応じてサイズ調整
+                color: white;
+                font-size: 3rem;
             }
             
             p {
-                color: white; // pも白く
+                color: white;
                 font-size: 1.2rem;
             }
         }
     }
     .home-main {
         width: 100%;
-        background: linear-gradient(to bottom,
-            #271cc7 0%,
-            /* ネオンブルー */
-            #0a0a2a 40%,
-            /* ダークネイビー */
-            #2e1fff 100%
-            /* 薄紫寄りブルー */
-        );
+        background-color: #111111;
 
         .home-main-content {
             width: 100%;
             padding: 40px 0;
 
             .home-main-content-wrap {
-                max-width: 1100px;
+                max-width: variables.$user-base-max-width;
                 margin: 0 auto;
                 color: #fff;
 
@@ -74,17 +67,20 @@
                 }
 
                 .home-main-content-product-list {
+                    width: 100%;
                     padding: 50px 0;
                     display: flex;
-                    gap: 0 40px;
 
                     .home-main-content-product-item {
                         width: fit-content;
                         height: fit-content;
+                        margin: 0 auto;
 
                         img {
-                            width: 245px;
-                            height: 245px;
+                            width: 230px;
+                            height: 230px;
+                            border-radius: 10px;
+                            border: 1px solid #fff;
                         }
 
                         .name {
@@ -102,7 +98,21 @@
                             color: #222;
                             background: #fff;
                         }
+
+                        &:first-child {
+                            margin-left: 0;
+                        }
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
                     }
+                }
+
+                .more-link {
+                    width: fit-content;
+                    display: block;
+                    margin: 10px 0 0 auto;
                 }
             }
         }
@@ -216,6 +226,47 @@
             span {
                 display: inline-block;
                 vertical-align: middle;
+            }
+        }
+    }
+    // ログイン画面
+    .login-form-wrap {
+        width: 100%;
+
+        .input-field {
+            margin-top: 32px;
+
+            label {
+                font-size: 14px;
+            }
+
+            input {
+                width: 100%;
+                margin-top: 2px;
+                max-width: 600px;
+                padding: 8px 10px;
+                border: 1px solid #222;
+                border-radius: 6px;
+                display: block;
+                outline: none;
+            }
+        }
+
+        .input-field-show-password {
+            margin-top: 32px;
+        }
+
+        .submit-buntton {
+            display: block;
+            width: 180px;
+            background-color: #222;
+            color: #fff;
+            border-radius: 8px;
+            margin: 40px auto 0 auto;
+            padding: 8px 16px;
+
+            &:hover{
+                cursor: pointer;
             }
         }
     }
