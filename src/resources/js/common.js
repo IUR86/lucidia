@@ -95,3 +95,13 @@ $(function () {
         $input.attr('type', type);
     });
 });
+
+/**
+ * ハンバーガーメニュー
+ */
+$(function () {
+    const btn = document.querySelector('#hamburger')
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('open')
+    })
+});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -31,6 +32,8 @@ final class LoginController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
+        $cart = new Cart();
+
         $credentials = $request->only('email', 'password');
 
         // 認証処理
@@ -39,11 +42,19 @@ final class LoginController extends Controller
 
             $request->session()->regenerate();
 
+            $user = Auth::guard('user')->user();
+
+            $using_cart = $cart->getUsingCart();
+            $using_cart->user_id = $user->id;
+            $using_cart->save();
+
             return redirect()->intended(route('user.home.index'));
         }
 
         Log::info("ユーザログイン失敗: " . $request->email);
 
-        return back()->withErrors(['email' => 'ログイン情報が正しくありません。']);
+        session()->flash('flash_message', 'ログイン情報が正しくありません');
+
+        return back();
     }
 }

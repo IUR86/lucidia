@@ -1,6 +1,7 @@
 <x-user.common>
     <main class="user-main">
         <div class="user-container">
+            <x-user.flash_message.alert />
             <h1 class="shopping-title">ログイン</h1>
             <div class="login-form-wrap">
                 <form action="{{ route('user.login.login') }}" method="POST">

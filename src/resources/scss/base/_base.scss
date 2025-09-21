@@ -1,6 +1,11 @@
 // ファイル呼び出し
 @use "../abstracts/variables";
 
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 header {
     display: flex;
     justify-content: space-between;

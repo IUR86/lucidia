@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\User\Shopping\UserShoppingIndexAction;
 use App\Actions\User\Shopping\UserShoppingStoreAction;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,11 +13,18 @@ final class ShoppingController extends Controller
     /**
      * 購入手続き画面を表示
      *
-     * @return \Illuminate\Contracts\View\View
+     * @param UserShoppingIndexAction $action
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(UserShoppingIndexAction $action): \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
+        $result = $action();
+
+        if ($result === false) {
+            return redirect()->back();
+        }
 
         return view('user.shopping.index');
     }

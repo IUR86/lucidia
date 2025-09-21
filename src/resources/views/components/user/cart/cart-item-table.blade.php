@@ -8,13 +8,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($using_cart->cartItems as $cart_item)
+        @if (count($using_cart->cartItems) > 0)
+            @foreach ($using_cart->cartItems as $cart_item)
+                <tr>
+                    <td>{{ $cart_item->product->name }}</td>
+                    <td>{{ $cart_item->product->price }}円</td>
+                    <td>{{ $cart_item->quantity }}個</td>
+                    <td>{{ $cart_item->quantity * $cart_item->product->price }}円</td>
+                </tr>
+            @endforeach
+        @else
             <tr>
-                <td>{{ $cart_item->product->name }}</td>
-                <td>{{ $cart_item->product->price }}円</td>
-                <td>{{ $cart_item->quantity }}個</td>
-                <td>{{ $cart_item->quantity * $cart_item->product->price }}円</td>
+                <td colspan="4" class="none-cart">
+                    カートに商品がありません。
+                </td>
             </tr>
-        @endforeach
+        @endif
     </tbody>
 </table>
