@@ -4,6 +4,7 @@ namespace App\Actions\User\Shopping;
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 final class UserShoppingIndexAction
 {
@@ -14,6 +15,8 @@ final class UserShoppingIndexAction
      */
     public function __invoke(): bool
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
         $user = Auth::guard('user')->user();
 
         if ($user === null) {

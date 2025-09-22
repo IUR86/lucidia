@@ -58,8 +58,9 @@ final class UserShoppingStoreAction
                     Log::info("カート商品:{$cart_item->id}が削除されました", ["cart_id" => $cart_item->cart_id]);
                 }
 
-                $order->stripe_checkout_session_id = $checkout->id;
-                $order->payment_status = $checkout->payment_status;
+                $order->stripe_checkout_session_id  = $checkout->id;
+                $order->payment_status              = $checkout->payment_status;
+                $order->stripe_response             = $checkout->toArray();
                 $order->save();
 
                 return $checkout;

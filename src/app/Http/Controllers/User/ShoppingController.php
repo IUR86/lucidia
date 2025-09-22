@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\User\Shopping\UserShoppingCompleteAction;
 use App\Actions\User\Shopping\UserShoppingIndexAction;
 use App\Actions\User\Shopping\UserShoppingStoreAction;
 use App\Http\Controllers\Controller;
@@ -46,11 +47,15 @@ final class ShoppingController extends Controller
     /**
      * 購入完了画面を表示
      *
+     * @param Request $request
+     * @param UserShoppingCompleteAction $action
      * @return \Illuminate\Contracts\View\View
      */
-    public function complete(): \Illuminate\Contracts\View\View
+    public function complete(Request $request, UserShoppingCompleteAction $action): \Illuminate\Contracts\View\View
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
+        $action($request);
 
         return view('user.shopping.complete');
     }

@@ -86,7 +86,7 @@ final class StripeService
             'payment_method_types' => ['card'],
             'line_items' => $line_items,
             'customer' => $user->stripe_id,
-            'success_url' => route('user.shopping.complete'),
+            'success_url' => route('user.shopping.complete') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url'  => route('user.shopping.complete'),
         ]);
 
@@ -94,17 +94,31 @@ final class StripeService
     }
 
     /**
-     * 支払い方法を取得します
+     * 支払い情報を取得します
      *
      * @param string $payment_intent_id
      * @return \Stripe\PaymentIntent
      */
-    public function findPaymentMethod(string $payment_intent_id): \Stripe\PaymentIntent
+    public function findPaymentIntent(string $payment_intent_id): \Stripe\PaymentIntent
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
-        Log::info("支払い方法:{$payment_intent_id}を取得");
+        Log::info("支払い情報:{$payment_intent_id}を取得");
 
         return $this->stripe->paymentIntents->retrieve($payment_intent_id);
+    }
+
+    /**
+     * 支払い方法を取得します
+     *
+     * @param string $payment_method_id
+     * @return \Stripe\PaymentMethod
+     */
+    public function findPaymentMethod(string $payment_method_id): \Stripe\PaymentMethod
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("支払い方法:{$payment_method_id}を取得");
+
+        return $this->stripe->paymentMethods->retrieve($payment_method_id);
     }
 
     /**
@@ -143,6 +157,22 @@ final class StripeService
 
         $user->stripe_id = $stripe_user->id;
         $user->save();
+    }
+
+    /**
+     * 購入履歴の詳細データを取得
+     *
+     * @param string $session_id
+     * @return \Stripe\Checkout\Session
+     */
+    public function findSession(string $session_id): \Stripe\Checkout\Session
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("購入履歴:{$session_id}を取得します");
+
+        $session = $this->stripe->checkout->sessions->retrieve($session_id);
+
+        return $session;
     }
 
     /**
