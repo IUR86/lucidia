@@ -1,5 +1,8 @@
 // ファイル呼び出し
 @use "../abstracts/variables";
+@use "../mixins/titles";
+@use "../mixins/buttons";
+@use "../mixins/tables";
 
 .user-main {
     // 画面レスポンシブ対応
@@ -92,11 +95,8 @@
                         }
 
                         button {
-                            border: 1px solid #fff;
                             margin: 16px 0 0 0;
-                            padding: 4px 16px;
-                            color: #222;
-                            background: #fff;
+                            @include buttons.base-button(#fff, #222, 1px solid #fff);
                         }
 
                         &:first-child {
@@ -120,9 +120,7 @@
     }
     // カート画面
     .cart-title {
-        padding: 0 0 10px 0;
-        border-bottom: 2px solid #222;
-        margin: 0 0 20px 0;
+        @extend %section-title;
     }
     .cart-table {
         width: 100%;
@@ -180,23 +178,16 @@
         align-items: center;
 
         button {
-            width: 120px;
-            padding: 6px 0;
-            display: block;
-            text-align: center;
-            border: 1px solid #222;
+            @include buttons.base-button();
         }
 
         .next-button {
-            background-color: #222;
-            color: #fff;
+            @include buttons.base-button(#222, #fff);
         }
     }
     // 購入手続き画面
     .shopping-title {
-        padding: 0 0 10px 0;
-        border-bottom: 2px solid #222;
-        margin: 0 0 20px 0;
+        @extend %section-title;
     }
     .shopping-item-wrap {
         margin: 0 0 20px 0;
@@ -265,17 +256,10 @@
         }
 
         .submit-buntton {
-            display: block;
+            @include buttons.base-button(#222, #fff);
             width: 180px;
-            background-color: #222;
-            color: #fff;
             border-radius: 8px;
-            margin: 40px auto 0 auto;
-            padding: 8px 16px;
-
-            &:hover{
-                cursor: pointer;
-            }
+            margin: 40px auto 0;
         }
     }
     // 購入履歴画面

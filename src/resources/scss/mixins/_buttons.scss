@@ -1,0 +1,9 @@
+@mixin base-button($bg: #fff, $color: #222, $border: 1px solid #222) {
+    display: block;
+    text-align: center;
+    padding: 6px 16px;
+    border: $border;
+    background-color: $bg;
+    color: $color;
+    cursor: pointer;
+}
