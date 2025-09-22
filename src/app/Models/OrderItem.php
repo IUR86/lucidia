@@ -4,6 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $order_id
+ * @property int $product_id
+ * @property string $product_name 商品名
+ * @property int $price 単価
+ * @property int $quantity 数量
+ * @property int $subtotal 小計
+ * @property array<array-key, mixed>|null $stripe_product_data Stripeの商品情報(JSON)
+ * @property \Illuminate\Support\Carbon $created_at 作成日時
+ * @property \Illuminate\Support\Carbon $updated_at 更新日時
+ * @property string|null $deleted_at 削除日時
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereProductName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereStripeProductData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereSubtotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderItem whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 final class OrderItem extends Model
 {
     /**

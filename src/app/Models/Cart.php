@@ -8,6 +8,24 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property int $id
+ * @property string $cart_key カートキー
+ * @property int|null $user_id ユーザID
+ * @property \Illuminate\Support\Carbon $created_at 作成日時
+ * @property \Illuminate\Support\Carbon $updated_at 更新日時
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CartItem> $cartItems
+ * @property-read int|null $cart_items_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart whereCartKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cart whereUserId($value)
+ * @mixin \Eloquent
+ */
 final class Cart extends Model
 {
     /**

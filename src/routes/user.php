@@ -7,11 +7,17 @@ use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\ShoppingController;
 use Illuminate\Support\Facades\Route;
 
 // ユーザ画面
 Route::prefix('/')->name('user.')->group(function () {
+    // 新規登録
+    Route::prefix('/register')->controller(RegisterController::class)->name('register.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });
     // ログイン
     Route::prefix('/login')->controller(LoginController::class)->name('login.')->group(function () {
         Route::get('/', 'index')->name('index');

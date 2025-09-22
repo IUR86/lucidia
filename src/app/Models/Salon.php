@@ -8,24 +8,26 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
+ * @property int $counterparty_id 契約相手ID
  * @property string $name 名称
  * @property string $description 説明
  * @property int $prefecture 都道府県
  * @property string $postal_code 郵便番号
  * @property string $address1 市区町村
- * @property string $address2 番地・建物名など
- * @property string $latitude 緯度
- * @property string $longitude 軽度
+ * @property string|null $address2 番地・建物名など
+ * @property string|null $latitude 緯度
+ * @property string|null $longitude 経度
  * @property string $tel 電話番号
  * @property string $email メールアドレス
  * @property string $opening_time 営業開始時間
  * @property string $closing_time 営業終了時間
- * @property string $regular_holiday 定休日
- * @property string $website_url 店舗の公式URL
+ * @property string|null $regular_holiday 定休日
+ * @property string|null $website_url 店舗の公式URL
  * @property int $capacity 予約数
  * @property \Illuminate\Support\Carbon $created_at 作成日時
  * @property \Illuminate\Support\Carbon $updated_at 更新日時
  * @property string|null $deleted_at 削除日時
+ * @property-read \App\Models\Counterparty|null $counterparty
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon query()
@@ -33,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereAddress2($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereCapacity($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereClosingTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereCounterpartyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Salon whereDescription($value)

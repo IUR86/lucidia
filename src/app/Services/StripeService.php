@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Stripe\Customer;
+use Stripe\Stripe;
 use Stripe\StripeClient;
 
 final class StripeService
@@ -71,6 +73,8 @@ final class StripeService
      */
     public function checkout(array $line_items): \Stripe\Checkout\Session
     {
+        Log::info("チェックアウトを開始します", $line_items);
+
         $user = Auth::guard('user')->user();
 
         $checkout = $this->stripe->checkout->sessions->create([
@@ -83,5 +87,20 @@ final class StripeService
         ]);
 
         return $checkout;
+    }
+
+    /**
+     * カスタマーを作成します
+     *
+     * @param array $customer_data
+     * @return \Stripe\Customer
+     */
+    public function createUser(array $customer_data): \Stripe\Customer
+    {
+        Log::info("カスタマーを作成します", $customer_data);
+
+        $customer = $this->stripe->customers->create($customer_data);
+
+        return $customer;
     }
 }
