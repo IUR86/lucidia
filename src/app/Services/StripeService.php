@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Stripe\Customer;
@@ -120,5 +121,65 @@ final class StripeService
         $customer = $this->stripe->customers->create($customer_data);
 
         return $customer;
+    }
+
+    /**
+     * ユーザモデルからカスタマーを作成します
+     *
+     * @param User $user
+     * @return void
+     */
+    public function createUserFromModel(User $user): void
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("ユーザモデル:{$user->id}からカスタマーを作成します", $user->toArray());
+
+        $save_user_data = [];
+        $save_user_data['name']     = $user->name;
+        $save_user_data['email']    = $user->email;
+        $save_user_data['metadata'] = $user->toArray();
+
+        $stripe_user = $this->createUser($save_user_data);
+
+        $user->stripe_id = $stripe_user->id;
+        $user->save();
+    }
+
+    /**
+     * 購入履歴を取得します
+     *
+     * @param string $stripe_customer_id
+     * @return \Stripe\Collection<\Stripe\Checkout\Session>
+     */
+    public function getSessionsAll(string $stripe_customer_id): \Stripe\Collection
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("購入履歴を取得します");
+
+        $sessions = $this->stripe->checkout->sessions->all([
+            'customer' => $stripe_customer_id,
+            'limit' => 100,
+        ]);
+
+        return $sessions;
+    }
+
+    /**
+     * 購入商品履歴を取得します
+     *
+     * @param string $session_id
+     * @param string $stripe_customer_id
+     * @return \Stripe\Collection
+     */
+    public function getAllLineItems(string $session_id, string $stripe_customer_id): \Stripe\Collection
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("購入商品履歴を取得します");
+
+        $line_items = $this->stripe->checkout->sessions->allLineItems($session_id, [
+            'limit' => 100,
+        ]);
+
+        return $line_items;
     }
 }
