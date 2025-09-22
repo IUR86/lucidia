@@ -68,7 +68,7 @@ final class OrderItem extends Model
     public function setSavingData(Order $order, CartItem $cart_item): self
     {
         $this->order_id = $order->id;
-        $this->product_id = $cart_item->id;
+        $this->product_id = $cart_item->product_id;
         $this->product_name = $cart_item->product->name;
         $this->price = $cart_item->product->price;
         $this->quantity = $cart_item->quantity;

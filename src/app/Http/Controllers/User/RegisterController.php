@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -54,6 +55,11 @@ final class RegisterController extends Controller
             $user->save();
 
             Log::info("ユーザ:{$user->id}にstripe_id:{$user->stripe_id}をセット", $created_user_data);
+
+            $credentials = $request->only('email', 'password');
+            Auth::guard('user')->attempt($credentials);
+
+            Log::info("ユーザログイン成功: " . $request->email);
         });
 
         return redirect()->intended(route('user.home.index'));

@@ -32,6 +32,7 @@ final class StripeService
      */
     public function createProduct($options = []): \Stripe\Product
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
         Log::info('stripに商品を作成します', $options);
 
         $product_data = [
@@ -54,6 +55,7 @@ final class StripeService
      */
     public function createProductPrice(string $stripe_product_id, $options = []): \Stripe\Price
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
         Log::info("stripに商品{$stripe_product_id}の料金を作成します", $options);
 
         $product_price_data = [
@@ -73,6 +75,7 @@ final class StripeService
      */
     public function checkout(array $line_items): \Stripe\Checkout\Session
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
         Log::info("チェックアウトを開始します", $line_items);
 
         $user = Auth::guard('user')->user();
@@ -81,12 +84,26 @@ final class StripeService
             'mode' => 'payment',
             'payment_method_types' => ['card'],
             'line_items' => $line_items,
-            'customer_email' => $user->email,
+            'customer' => $user->stripe_id,
             'success_url' => route('user.shopping.complete'),
             'cancel_url'  => route('user.shopping.complete'),
         ]);
 
         return $checkout;
+    }
+
+    /**
+     * 支払い方法を取得します
+     *
+     * @param string $payment_intent_id
+     * @return \Stripe\PaymentIntent
+     */
+    public function findPaymentMethod(string $payment_intent_id): \Stripe\PaymentIntent
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+        Log::info("支払い方法:{$payment_intent_id}を取得");
+
+        return $this->stripe->paymentIntents->retrieve($payment_intent_id);
     }
 
     /**
@@ -97,6 +114,7 @@ final class StripeService
      */
     public function createUser(array $customer_data): \Stripe\Customer
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
         Log::info("カスタマーを作成します", $customer_data);
 
         $customer = $this->stripe->customers->create($customer_data);
