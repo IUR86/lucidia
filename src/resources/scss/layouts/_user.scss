@@ -140,7 +140,7 @@
                 padding: 12px 16px;
                 text-align: left;
                 font-weight: 600;
-                color: #333;
+                color: variables.$user-table-border-color;
                 border: 1px solid #dee2e6;
                 background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
             }
@@ -263,18 +263,21 @@
         }
     }
     // 購入履歴画面
+    .order_history-title {
+        @extend %section-title;
+    }
     .order_history-table {
         width: 100%;
         padding: 0 0 10px 0;
-        border: 1px solid #222;
+        border: 1px solid variables.$user-table-border-color;;
         margin: 0 0 20px 0;
         border-collapse: collapse;
         
         tr {
-            border: 1px solid #222;
+            border: 1px solid variables.$user-table-border-color;;
 
             th, td {
-                border: 1px solid #222;
+                border: 1px solid variables.$user-table-border-color;
                 padding: 12px 16px;
             }
         }
