@@ -3,9 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\UserVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Cashier\Billable;
 
 /**
@@ -45,7 +49,7 @@ use Laravel\Cashier\Billable;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-final class User extends Authenticatable
+final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, Billable;
@@ -59,6 +63,7 @@ final class User extends Authenticatable
         'name',
         'email',
         'password',
+        'prefecture_id',
     ];
 
     /**
@@ -82,5 +87,31 @@ final class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * 認証メールを送信します
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
+        $this->notify(new UserVerifyEmail);
+    }
+
+    /**
+     * ログイン中のメール認証済みユーザを取得します
+     *
+     * @return User|null
+     */
+    public function loginUser(): User|null
+    {
+        if ($this->query()->where('email_verified_at', '!=', null)->exists()) {
+            return $this;
+        }
+
+        return null;
     }
 }

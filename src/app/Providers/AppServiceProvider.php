@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Enum\PaymentMethod;
+use App\Enum\Prefecture;
 use App\Enum\Stripe\StripePaymentStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -50,5 +51,6 @@ class AppServiceProvider extends ServiceProvider
         Cashier::calculateTaxes();
         View::share('PaymentMethod', PaymentMethod::class);
         View::share('StripePaymentStatus', StripePaymentStatus::class);
+        View::share('Prefecture', Prefecture::class);
     }
 }

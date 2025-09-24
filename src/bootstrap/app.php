@@ -4,6 +4,7 @@ use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\AdminGest;
 use App\Http\Middleware\CounterpartyAuthenticate;
 use App\Http\Middleware\CounterpartyEnsureValidSubdomain;
+use App\Http\Middleware\UserAuthenticate;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -43,6 +44,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
         $middleware->alias([
+            'user.auth'                 => UserAuthenticate::class,
             'admin.auth'                => AdminAuthenticate::class,
             'admin.gest'                => AdminGest::class,
             'counterparty.subdomain'    => CounterpartyEnsureValidSubdomain::class,

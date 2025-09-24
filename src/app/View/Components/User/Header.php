@@ -20,7 +20,9 @@ class Header extends Component
      */
     public function __construct()
     {
-        $this->auth_user = Auth::guard('user')?->user();
+        /** @var User|null $auth_user */
+        $auth_user = Auth::guard('user')?->user();
+        $this->auth_user = $auth_user?->loginUser();
     }
 
     /**

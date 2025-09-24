@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Register\UserRegisterEmailVerificationRequest;
 use App\Models\User;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
@@ -55,12 +56,27 @@ final class RegisterController extends Controller
             $user->save();
 
             Log::info("ユーザ:{$user->id}にstripe_id:{$user->stripe_id}をセット", $created_user_data);
-
-            $credentials = $request->only('email', 'password');
-            Auth::guard('user')->attempt($credentials);
-
-            Log::info("ユーザログイン成功: " . $request->email);
         });
+
+        Auth::guard('user')->login($user, true);
+
+        $user->sendEmailVerificationNotification();
+        Log::info("ユーザ:{$user->id}に新規登録認証メールを送信しました。");
+
+        return redirect()->intended(route('user.home.index'));
+    }
+
+    /**
+     * 認証メールのURLを検証します
+     *
+     * @param UserRegisterEmailVerificationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verificationVerify(UserRegisterEmailVerificationRequest $request): \Illuminate\Http\RedirectResponse
+    {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
+        $request->fulfill();
 
         return redirect()->intended(route('user.home.index'));
     }

@@ -18,6 +18,14 @@
                         <label>パスワード</label>
                         <input type="password" name="password" id="password">
                     </div>
+                    <div class="input-field">
+                        <label>都道府県</label>
+                        <select name="prefecture_id">
+                            @foreach ($Prefecture::options() as $option)
+                                <option value="{{ $option['id'] }}">{{ $option['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="input-field-show-password">
                         <input type="checkbox" name="" id="show-password">
                         <label for="show-password" id="togglePassword">パスワードを見る</label>

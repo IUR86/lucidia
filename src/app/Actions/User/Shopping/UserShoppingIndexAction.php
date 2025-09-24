@@ -19,15 +19,10 @@ final class UserShoppingIndexAction
 
         $user = Auth::guard('user')->user();
 
-        if ($user === null) {
-            session()->flash('flash_message', 'ログインをしてください。');
-            return false;
-        }
-
         $using_cart = (new Cart())->getUsingCart();
 
         if (count($using_cart->cartItems()->get()->toArray()) < 1) {
-            session()->flash('flash_message', 'カートに商品がないため追加してください。');
+            session()->flash('alert_flash_message', 'カートに商品がないため追加してください。');
             return false;
         }
 
