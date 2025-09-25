@@ -19,25 +19,19 @@
 
 ---
 
-## 📂 ディレクトリ構成 (例)
+## 📂 ディレクトリ構成
 
 ```
 /
-├── docker/                     # Docker 関連設定ファイル群
-│   ├── Dockerfile               # 各サービスの Dockerfile
-│   ├── nginx/                   # nginx 用設定（例：conf ファイル）
-│   ├── php/                     # PHP / アプリケーション用 Docker 設定
-│   ├── db/                      # データベース用コンテナ設定
-│   └── etc.                     # その他 Docker 関連構成
+├── docker/                       # Docker 関連設定ファイル群
+│   ├── amazon-linux/             # amazon-linux 設定
+│   └── mysql/                    # MYSQL設定
 │
-├── shell/                      # シェルスクリプト群
-│   ├── init.sh
-│   ├── deploy.sh
-│   ├── backup.sh
-│   └── その他スクリプト
+├── shell/                        # シェルスクリプト群
+│   └── etc
 │
-├── src/                       # アプリケーション本体
-│   ├── public/                  # Web 公開用ドキュメントルート
+├── src/                          # アプリケーション本体
+│   ├── public/                   # Web 公開用ドキュメントルート
 │   │   ├── index.php
 │   │   └── assets/
 │   │       ├── css/
