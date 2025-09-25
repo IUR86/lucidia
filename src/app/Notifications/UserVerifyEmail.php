@@ -33,7 +33,7 @@ class UserVerifyEmail extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -63,6 +63,7 @@ class UserVerifyEmail extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
+            ->greeting('')
             ->line(Lang::get('Please click the button below to verify your email address.'))
             ->action(Lang::get('Verify Email Address'), $url)
             ->line(Lang::get('If you did not create an account, no further action is required.'));
@@ -110,5 +111,13 @@ class UserVerifyEmail extends Notification
     public static function toMailUsing($callback)
     {
         static::$toMailCallback = $callback;
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'email' => $notifiable->email,
+            'message' => 'メールアドレス認証をお送りました',
+        ];
     }
 }

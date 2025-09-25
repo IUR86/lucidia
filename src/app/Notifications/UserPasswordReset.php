@@ -36,6 +36,7 @@ final class UserPasswordReset extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->greeting('')
             ->line('パスワードリセットリンクです')
             ->action('リセット', $this->url);
     }
