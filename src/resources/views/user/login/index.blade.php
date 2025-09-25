@@ -1,6 +1,7 @@
 <x-user.common>
     <main class="user-main">
         <div class="user-container">
+            <x-user.flash_message.success />
             <x-user.flash_message.alert />
             <h1 class="shopping-title">ログイン</h1>
             <div class="login-form-wrap">
@@ -19,6 +20,7 @@
                         <label for="show-password" id="togglePassword">パスワードを見る</label>
                     </div>
                     <a href="{{ route('user.register.index') }}">新規会員登録</a>
+                    <a href="{{ route('user.password_reset.index') }}">パスワードリセット</a>
                     <input type="submit" value="ログイン" class="submit-buntton">
                 </form>
             </div>
