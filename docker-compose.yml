@@ -7,13 +7,13 @@ services:
     volumes:
       - ./:/var/www/lucidia
     ports:
-      - 80:80
+      - ${APP_PORT}:80
     depends_on:
       - db
       - mailhog
       - node
     environment:
-      - TZ=Asia/Tokyo
+      - TZ=${TZ}
 
   node:
     image: node:18
@@ -23,31 +23,31 @@ services:
       - ./src:/var/www/lucidia
     command: sh -c "npm install && npm run dev"
     ports:
-      - 5173:5173
+      - ${NODE_PORT}:5173
     environment:
-      - TZ=Asia/Tokyo
+      - TZ=${TZ}
 
   db:
     image: mysql:5.7
     container_name: lucidia-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test_database
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
-      TZ: 'Asia/Tokyo'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
     platform: linux/amd64
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
-      - 3306:3306
+      - ${MYSQL_PORT}:3306
 
   mailhog:
     image: mailhog/mailhog
     container_name: lucidia-mailhog
     ports:
-      - 1025:1025
-      - 8025:8025
+      - ${MAILHOG_SMTP_PORT}:1025
+      - ${MAILHOG_HTTP_PORT}:8025
