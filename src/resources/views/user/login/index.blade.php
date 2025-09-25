@@ -19,8 +19,10 @@
                         <input type="checkbox" name="" id="show-password">
                         <label for="show-password" id="togglePassword">パスワードを見る</label>
                     </div>
-                    <a href="{{ route('user.register.index') }}">新規会員登録</a>
-                    <a href="{{ route('user.password_reset.index') }}">パスワードリセット</a>
+                    <div class="link-wrap">
+                        <a href="{{ route('user.register.index') }}">新規会員登録</a>
+                        <a href="{{ route('user.password_reset.index') }}">パスワードリセット</a>
+                    </div>
                     <input type="submit" value="ログイン" class="submit-buntton">
                 </form>
             </div>

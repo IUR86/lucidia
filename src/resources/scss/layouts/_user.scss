@@ -261,6 +261,20 @@
             border-radius: 8px;
             margin: 40px auto 0;
         }
+
+        .link-wrap {
+            margin: 20px 0 0 0;
+            display: flex;
+            gap: 0 20px;
+
+            a {
+                display: block;
+            }
+        }
+
+        .caution-message{
+            margin: 20px 0 0 0;
+        }
     }
     // 購入履歴画面
     .order_history-title {
