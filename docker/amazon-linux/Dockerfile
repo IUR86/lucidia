@@ -44,5 +44,10 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 # ポート
 EXPOSE 80
 
-# PHP-FPM + nginx 起動
-CMD ["/bin/sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Entrypoint
+COPY ./shell/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
+# CMD はサービス起動（ENTRYPOINT の exec "$@" に渡される）
+CMD ["nginx", "-g", "daemon off;"]
