@@ -6,6 +6,8 @@ use App\Models\Traits\Booted\OrderAt;
 use App\Models\Traits\Booted\UserId;
 use App\Models\Traits\Booted\UuidCode;
 use Illuminate\Database\Eloquent\Model;
+use Stripe\Checkout\Session;
+use Stripe\PaymentMethod;
 
 /**
  * @property int $id
@@ -91,5 +93,26 @@ final class Order extends Model
         return [
             'stripe_response' => 'array',
         ];
+    }
+
+    /**
+     * 注文完了の情報を更新
+     *
+     * @param Session $session
+     * @param PaymentMethod $payment_method
+     * @return void
+     */
+    public function updateOrderComplete(Session $session, PaymentMethod $payment_method): void
+    {
+        $this->order->customer_name = $session->customer_details->name;
+        $this->order->customer_email = $session->customer_details->email;
+        $this->order->customer_phone = $session->customer_details->phone;
+        $this->order->payment_method = $payment_method->type;
+        $this->order->payment_card_brand = $payment_method->card->brand;
+        $this->order->payment_card_last4 = $payment_method->card->last4;
+        $this->order->payment_status = $session->payment_status;
+        $this->order->stripe_response = $session->toArray();
+        $this->order->stripe_payment_intent_id  = $session->payment_intent;
+        $this->order->save();
     }
 }

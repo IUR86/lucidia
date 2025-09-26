@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enum\SessionKey;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class UserAuthenticate
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('user')->check() === false) {
-            session()->flash('alert_flash_message', 'ログインをしてください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'ログインをしてください。');
             return redirect()->route('user.login.index');
         }
 

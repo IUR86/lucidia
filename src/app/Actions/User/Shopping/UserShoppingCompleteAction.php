@@ -31,16 +31,6 @@ final class UserShoppingCompleteAction
         $payment_method = $stripe->findPaymentMethod($payment_intent->payment_method);
 
         $order = (new Order())->newQuery()->whereStripeCheckoutSessionId($session_id)->firstOrFail();
-        $order->customer_name = $session->customer_details->name;
-        $order->customer_email = $session->customer_details->email;
-        $order->customer_phone = $session->customer_details->phone;
-        $order->payment_method = $payment_method->type;
-        $order->payment_card_brand = $payment_method->card->brand;
-        $order->payment_card_last4 = $payment_method->card->last4;
-        $order->payment_status = $session->payment_status;
-        $order->stripe_response = $session->toArray();
-        $order->stripe_payment_intent_id  = $session->payment_intent;
-
-        $order->save();
+        $order->updateOrderComplete($session, $payment_method);
     }
 }

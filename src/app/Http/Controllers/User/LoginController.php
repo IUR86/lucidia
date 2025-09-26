@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enum\SessionKey;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ final class LoginController extends Controller
 
         Log::info("ユーザログイン失敗: " . $request->email);
 
-        session()->flash('flash_message', 'ログイン情報が正しくありません');
+        session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'ログイン情報が正しくありません');
 
         return back();
     }
