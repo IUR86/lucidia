@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enum\SessionKey;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\UserPasswordReset;
@@ -37,19 +38,19 @@ final class PasswordResetController extends Controller
         $email = $request->email;
 
         if ($email === null) {
-            session()->flash('alert_flash_message', 'メールアドレスを入力してください');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'メールアドレスを入力してください');
             return back();
         }
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            session()->flash('alert_flash_message', '正しいメールアドレスを入力してください');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, '正しいメールアドレスを入力してください');
             return back();
         }
 
         $user = User::where('email', $email)->first();
 
         if ($user === null) {
-            session()->flash('alert_flash_message', 'ユーザが見つかりませんでした');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'ユーザが見つかりませんでした');
             return back();
         }
 
@@ -64,7 +65,7 @@ final class PasswordResetController extends Controller
         Log::info("{$password_reset_url}のURL送信します");
         $user->notify(new UserPasswordReset($password_reset_url));
 
-        session()->flash('success_flash_message', 'パスワードリセットリンクを送信しました');
+        session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'パスワードリセットリンクを送信しました');
 
         return back();
     }
@@ -85,7 +86,7 @@ final class PasswordResetController extends Controller
 
         if ($user === null) {
             Log::info("メール:{$email}のユーザが見つかりません。");
-            session()->flash('alert_flash_message', '無効または期限切れのURLです。リセットメールを再送してください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, '無効または期限切れのURLです。リセットメールを再送してください。');
             return redirect()->route('user.password_reset.index');
         }
 
@@ -93,7 +94,7 @@ final class PasswordResetController extends Controller
 
         if (!$exists_token) {
             Log::info("トークン:{$token}が見つかりません。", [$user->toArray()]);
-            session()->flash('alert_flash_message', '無効または期限切れのURLです。リセットメールを再送してください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, '無効または期限切れのURLです。リセットメールを再送してください。');
             return redirect()->route('user.password_reset.index');
         }
 
@@ -120,14 +121,14 @@ final class PasswordResetController extends Controller
         $user = User::where('email', $email)->first();
 
         if ($user === null) {
-            session()->flash('alert_flash_message', '無効なメールアドレスです。再度パスワードリセットしてください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, '無効なメールアドレスです。再度パスワードリセットしてください。');
             return redirect()->route('user.login.index');
         }
 
         $exists_token = Password::tokenExists($user, $token);
 
         if (!$exists_token) {
-            session()->flash('alert_flash_message', '無効なリセットです。再度パスワードリセットしてください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, '無効なリセットです。再度パスワードリセットしてください。');
             return redirect()->route('user.login.index');
         }
 

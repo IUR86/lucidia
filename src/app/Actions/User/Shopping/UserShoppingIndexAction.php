@@ -2,6 +2,7 @@
 
 namespace App\Actions\User\Shopping;
 
+use App\Enum\SessionKey;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,7 @@ final class UserShoppingIndexAction
         $using_cart = (new Cart())->getUsingCart();
 
         if (count($using_cart->cartItems()->get()->toArray()) < 1) {
-            session()->flash('alert_flash_message', 'カートに商品がないため追加してください。');
+            session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'カートに商品がないため追加してください。');
             return false;
         }
 
