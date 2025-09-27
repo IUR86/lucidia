@@ -13,8 +13,7 @@
                             {{ $auth_user->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            {{-- <li><a class="dropdown-item" href="">プロフィール編集</a></li> --}}
-                            {{-- <li><a class="dropdown-item" href="">パスワード再発行</a></li> --}}
+                            <li><a class="dropdown-item" href="{{ route('user.profile.index') }}">プロフィール編集</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.logout.logout') }}">ログアウト</a></li>
                         </ul>
                     </div>

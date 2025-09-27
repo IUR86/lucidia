@@ -8,6 +8,7 @@ use App\Http\Controllers\User\LogoutController;
 use App\Http\Controllers\User\OrderHistoryController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\ShoppingController;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,11 @@ Route::prefix('/')->name('user.')->group(function () {
     });
     // ログイン中
     Route::middleware(['user.auth'])->group(function () {
+        // プロフィール
+        Route::prefix('/profile')->controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'update')->name('update');
+        });
         // ログアウト
         Route::prefix('/login')->controller(LogoutController::class)->name('logout.')->group(function () {
             Route::get('/logout', 'logout')->name('logout');

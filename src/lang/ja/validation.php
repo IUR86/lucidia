@@ -187,6 +187,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'          => '名前',
+        'email'         => 'メールアドレス',
+        'postal_code'   => '郵便番号',
+        'address1'      => '都道府県、市区町村、町名、番地',
+        'address2'      => '建物名、部屋番号、フロア',
+    ],
 
 ];
