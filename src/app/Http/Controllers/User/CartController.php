@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\User\Cart\UserCartIndexAction;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 final class CartController extends Controller
@@ -19,6 +18,14 @@ final class CartController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('user.cart.index', $action());
+        $result = $action();
+
+        $this->meta_service->setTitle('ログイン');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.cart.index', [
+            'using_cart'        => $result['using_cart'],
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 }

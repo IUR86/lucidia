@@ -1,4 +1,4 @@
-<x-user.common>
+<x-user.common :meta_service="$meta_service">
     <main class="user-main">
         <div class="user-container">
             <h1 class="shopping-title">購入完了</h1>

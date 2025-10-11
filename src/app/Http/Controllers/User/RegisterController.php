@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 final class RegisterController extends Controller
 {
     /**
-     * 新規作成画面を表示
+     * ユーザ登録画面を表示
      *
      * @return \Illuminate\Contracts\View\View
      */
@@ -22,7 +22,12 @@ final class RegisterController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('user.register.index');
+        $this->meta_service->setTitle('ユーザ登録');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.register.index', [
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 
     /**

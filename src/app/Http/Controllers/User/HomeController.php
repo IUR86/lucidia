@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 final class HomeController extends Controller
 {
+    protected const META_TITLE = 'ホーム';
+    
     /**
      * ホーム画面を表示
      *
@@ -21,6 +23,13 @@ final class HomeController extends Controller
         $product_service  = Product::query()->where('type', ProductType::SERVICE)->get();
         $product_function = Product::query()->where('type', ProductType::FUNCTION)->get();
 
-        return view('user.home.index', ['product_service' => $product_service, 'product_function' => $product_function]);
+        $this->meta_service->setTitle('ホーム');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.home.index', [
+            'meta_service'      => $this->meta_service,
+            'product_service'   => $product_service, 
+            'product_function'  => $product_function,
+        ]);
     }
 }

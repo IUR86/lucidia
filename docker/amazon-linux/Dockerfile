@@ -39,15 +39,12 @@ RUN curl -sL https://rpm.nodesource.com/setup_20.x | bash - \
 RUN mkdir -p /run/php-fpm
 
 # nginx 設定
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY docker/amazon-linux/default.conf /etc/nginx/conf.d/default.conf
 
 # ポート
 EXPOSE 80
 
 # Entrypoint
-COPY ./shell/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY shell/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-
-# CMD はサービス起動（ENTRYPOINT の exec "$@" に渡される）
-CMD ["nginx", "-g", "daemon off;"]

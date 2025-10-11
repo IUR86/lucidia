@@ -18,6 +18,14 @@ final class OrderHistoryController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('user.order.history.index', $action());
+        $result = $action();
+
+        $this->meta_service->setTitle('購入履歴');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.order.history.index', [
+            'order_histories'   => $result['order_histories'],
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 }

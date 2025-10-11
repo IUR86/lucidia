@@ -1,9 +1,9 @@
-version: "3.9"
-
 services:
   amazon-linux:
     container_name: lucidia-amazon-linux
-    build: ./docker/amazon-linux
+    build:
+      context: .
+      dockerfile: docker/amazon-linux/Dockerfile
     volumes:
       - ./:/var/www/lucidia
     ports:

@@ -1,4 +1,4 @@
-<x-user.common>
+<x-user.common :meta_service="$meta_service">
     <main class="user-main">
         <div class="user-container">
             <x-user.flash_message.alert />

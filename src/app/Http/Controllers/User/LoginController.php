@@ -20,7 +20,12 @@ final class LoginController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('user.login.index');
+        $this->meta_service->setTitle('ログイン');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.login.index', [
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 
     /**

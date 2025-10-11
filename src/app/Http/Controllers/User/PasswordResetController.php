@@ -22,7 +22,12 @@ final class PasswordResetController extends Controller
     {
         Log::debug(__METHOD__ . '(' . __LINE__ . ')');
 
-        return view('user.password_reset.index');
+        $this->meta_service->setTitle('パスワードリセット');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.password_reset.index', [
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 
     /**
@@ -98,7 +103,14 @@ final class PasswordResetController extends Controller
             return redirect()->route('user.password_reset.index');
         }
 
-        return view('user.password_reset.reset', ['token' => $token, 'email' => $email]);
+        $this->meta_service->setTitle('パスワードリセット');
+        $this->meta_service->setDescription('説明');
+
+        return view('user.password_reset.reset', [
+            'token'             => $token, 
+            'email'             => $email,
+            'meta_service'      => $this->meta_service,
+        ]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Counterparty;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class CounterpartyEnsureValidSubdomain
@@ -16,6 +17,8 @@ class CounterpartyEnsureValidSubdomain
      */
     public function handle(Request $request, Closure $next): Response
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
         $subdomain = $request->route('subdomain');
 
         $counterparty = new Counterparty();

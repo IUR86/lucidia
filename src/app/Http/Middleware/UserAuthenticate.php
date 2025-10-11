@@ -6,6 +6,7 @@ use App\Enum\SessionKey;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserAuthenticate
@@ -17,6 +18,8 @@ class UserAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
+        Log::debug(__METHOD__ . '(' . __LINE__ . ')');
+
         if (Auth::guard('user')->check() === false) {
             session()->flash(SessionKey::ALERT_FLASH_MESSAGE->value, 'ログインをしてください。');
             return redirect()->route('user.login.index');

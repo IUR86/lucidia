@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use App\Services\MetaService;
 use Illuminate\Http\JsonResponse;
+use LogicException;
 
 abstract class Controller
 {
+    protected const META_TITLE = '';
+    protected const META_DESCRIPTION = '';
+
+    /**
+     * @var string|null
+     */
     protected string|null $subdomain;
+
+    /**
+     * @var MetaService
+     */
+    protected MetaService $meta_service;
 
     /**
      * 初期化処理
@@ -15,6 +27,7 @@ abstract class Controller
     public function __construct()
     {
         $this->subdomain = request()->route('subdomain');
+        $this->meta_service = new MetaService();
     }
 
     /**
